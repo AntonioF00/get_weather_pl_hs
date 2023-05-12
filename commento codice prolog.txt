@@ -1,0 +1,17 @@
+Il codice Prolog è una serie di istruzioni per calcolare il meteo di una data posizione utilizzando l'API OpenWeatherMap.
+
+Le prime quattro righe importano le librerie necessarie per il programma: `http/thread_httpd`, `http/http_dispatch`, e `http/http_json`. La libreria `http/thread_httpd` è utilizzata per creare un server web per il programma, mentre `http/http_dispatch` è utilizzata per mappare le richieste HTTP alle funzioni appropriate. La libreria `http/http_json` è utilizzata per gestire i dati JSON restituiti dall'API OpenWeatherMap.
+
+Le righe seguenti definiscono i tipi di dati JSON supportati dal server.
+
+La riga successiva definisce tre fatti dinamici: `latitudine/1`, `longitudine/1`, e `url/1`. Questi fatti possono essere utilizzati per memorizzare i dati della posizione e dell'URL.
+
+La funzione `inizializza_lat_lon/2` è utilizzata per inizializzare le coordinate latitudinali e longitudinali della posizione. Questa funzione utilizza `assertz` per asserire i fatti `latitudine/1` e `longitudine/1`.
+
+La funzione `crea_url/0` viene utilizzata per creare l'URL per l'API OpenWeatherMap. Questa funzione utilizza i fatti `latitudine/1` e `longitudine/1` per costruire l'URL, che viene quindi asserito nel fatto `url/1`.
+
+La riga successiva importa la libreria `http/http_client`, che viene utilizzata per effettuare richieste HTTP.
+
+La funzione `calcola_meteo/0` è la funzione principale del programma. Questa funzione utilizza il fatto `url/1` per effettuare una richiesta HTTP all'API OpenWeatherMap. La risposta viene quindi scritta sulla console utilizzando `write`. 
+
+In sintesi, il codice Prolog è utilizzato per creare un server web che restituisce il meteo di una data posizione utilizzando l'API OpenWeatherMap.
