@@ -1,8 +1,8 @@
 --note installazione dei pacchetti mancanti
 --nel progetto, per il suo corretto funzionamento
 -- cabal update
--- cabal install HTTP-Simple
--- cabal install mtl
+-- cabal update && cabal new-install --lib parallel HTTP-Simple
+-- cabal update && cabal new-install --lib parallel mtl
 
 --importazione della libreria `Network.Wreq` che viene utilizzata per effettuare richieste HTTP.
 --Viene anche importata la libreria `Control.Monad.State` per gestire lo stato dell'applicazione.
