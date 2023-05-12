@@ -4,6 +4,7 @@
 
 import Network.Wreq 
 import Control.Monad.State
+import Network.HTTP.Client.TLS
 
 data AppState = AppState
   { latitude :: Maybe String
@@ -41,3 +42,4 @@ getWeatherData = do
 
 main :: IO ()
 main = getWeatherData
+
