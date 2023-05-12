@@ -1,0 +1,11 @@
+Il codice Haskell importa la libreria `Network.Wreq` che viene utilizzata per effettuare richieste HTTP. Viene anche importata la libreria `Control.Monad.State` per gestire lo stato dell'applicazione.
+
+Viene definito un tipo di dati `AppState` che contiene tre campi `latitude`, `longitude`, e `url`, che possono essere opzionalmente presenti (`Maybe String`).
+
+La funzione `initializeLatLon` è una funzione di stato utilizzata per inizializzare le coordinate latitudinali e longitudinali della posizione. Utilizza `put` per impostare l'applicazione allo stato iniziale, `liftIO` per effettuare l'input/output e `modify` per aggiornare lo stato dell'applicazione.
+
+La funzione `createUrl` è utilizzata per creare l'URL per l'API OpenWeatherMap. Utilizza `gets` per leggere le coordinate latitudinali e longitudinali dallo stato dell'applicazione, `>>=` per concatenare i risultati, e `modify` per aggiornare lo stato dell'applicazione con l'URL creato.
+
+La funzione `getWeatherData` è la funzione principale del programma. Crea uno stato iniziale vuoto utilizzando `AppState` e `execStateT` per eseguire le funzioni di stato `initializeLatLon` e `createUrl`. Viene quindi utilizzato `getUrl'` per accedere all'URL creato nello stato dell'applicazione. Se l'URL esiste, viene effettuata una richiesta HTTP all'API OpenWeatherMap utilizzando `newTlsManager` per creare un gestore di richieste e `httpLbs` per effettuare la richiesta. La risposta viene quindi stampata sulla console utilizzando `putStrLn`. Se l'URL non esiste, viene stampato un messaggio di errore.
+
+La funzione `main` è utilizzata per avviare il programma chiamando `getWeatherData`.
