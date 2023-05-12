@@ -26,7 +26,9 @@ createUrl = do
 
 getWeatherData :: IO ()
 getWeatherData = do
-  let initialState = AppState { latitude = Nothing, longitude = Nothing, url = Nothing }
+  let initialState = AppState { latitude = Nothing, 
+                                longitude = Nothing, 
+                                url = Nothing }
       finalState = execStateT (initializeLatLon >> createUrl) initialState
       getUrl' = url
   case getUrl' finalState of
