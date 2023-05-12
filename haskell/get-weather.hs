@@ -6,10 +6,15 @@
 
 --importazione della libreria `Network.Wreq` che viene utilizzata per effettuare richieste HTTP.
 --Viene anche importata la libreria `Control.Monad.State` per gestire lo stato dell'applicazione.
-
+{-# LANGUAGE OverloadedStrings #-}
 import Network.Wreq 
 import Control.Monad.State
 import Network.HTTP.Client.TLS
+--import Control.Monad.State
+--import Network.HTTP.Client (newTlsManager, parseRequest, httpLbs)
+--import Network.HTTP.Simple (getResponseBody)
+
+
 
 --definizione di un tipo di dati `AppState` che contiene tre campi 
 --`latitude`, `longitude`, e `url`, che possono essere opzionalmente presenti (`Maybe String`).
