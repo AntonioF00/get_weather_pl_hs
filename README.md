@@ -8,4 +8,4 @@ cabal install http-simple
 cabal update && cabal new-install --lib parallel
 stack install http-simple
 stack install wreq
-stack install http-client-tls
+stack install --lib http-client-tls

@@ -13,6 +13,9 @@ main = do
     putStrLn "Inserisci la Longitudine:"
     longitudine <- getLine
     putStrLn $ "Hai inserito: " ++ latitudine ++ " e " ++ longitudine
-    let stringaConcatenata = concatenaStringhe "https://api.openweathermap.org/data/2.5/weather?lat=" latitudine ++ "&lon=" ++ longitudine ++ "&appid=9525a467ef22974bc25346d4bc02de69"
+    let stringa1 = "https://api.openweathermap.org/data/2.5/weather?lat="
+        stringa2 = "&lon="
+        stringa3 = "&appid=9525a467ef22974bc25346d4bc02de69"
+        stringaConcatenata = concatenaStringhe (concatenaStringhe stringa1 latitudine) (concatenaStringhe stringa2 longitudine ++ stringa3)
     response <- simpleHttp stringaConcatenata
     L.putStrLn response
