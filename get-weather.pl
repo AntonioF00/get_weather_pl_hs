@@ -1,3 +1,11 @@
+:- use_module(library(http/thread_httpd)).
+:- use_module(library(http/http_dispatch)).
+:- use_module(library(http/http_json)).
+
+http_json:json_type('application/x-javascript').
+http_json:json_type('text/javascript').
+http_json:json_type('text/x-javascript').
+http_json:json_type('text/x-json').
 
 :- dynamic latitudine/1, longitudine/1, url/1.
 
@@ -19,8 +27,8 @@ crea_url :-
 calcola_meteo() :-
     url(Url),
     http_get(Url, Response, []),
-    atom_codes(Data, Response),
-    write(Data).
+    write(Response).
+
 
 %%test
 
