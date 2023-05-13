@@ -1,5 +1,8 @@
 # get_weather_pl_hs
 
+Creation of an HTTP Client in Prolog and Haskell language capable of obtaining weather information based on the Latitude and Longitude data inserted in Input, the service will use the APIs made available by OpenWeather
+
+
 SWI-Prolog
 
 https://www.haskell.org/ghcup/
