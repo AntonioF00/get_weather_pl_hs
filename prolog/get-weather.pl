@@ -1,48 +1,48 @@
-%% importazione delle librerie necessarie per il programma
-:- use_module(library(http/thread_httpd)).
-:- use_module(library(http/http_dispatch)).
-:- use_module(library(http/http_json)).
+    %% importazione delle librerie necessarie per il programma
+    :- use_module(library(http/thread_httpd)).
+    :- use_module(library(http/http_dispatch)).
+    :- use_module(library(http/http_json)).
 
-%% definizione dei tipi di dati JSON supportati dal server.
-http_json:json_type('application/x-javascript').
-http_json:json_type('text/javascript').
-http_json:json_type('text/x-javascript').
-http_json:json_type('text/x-json').
+    %% definizione dei tipi di dati JSON supportati dal server.
+    http_json:json_type('application/x-javascript').
+    http_json:json_type('text/javascript').
+    http_json:json_type('text/x-javascript').
+    http_json:json_type('text/x-json').
 
-%%definizione dati dinamici dinamici che serviranno come variabili all'interno del
-%%server, latitudine per memorizzare il valore di latitudine inserito dall'utente
-%%longitudine per memorizzare il valore di longitudine inserito dall'utente
-%%url per memorizzare la stringha ri richiesta API creata tramite la concatenazione
-%%dei dati di latitutdine e longitudine
+    %%definizione dati dinamici dinamici che serviranno come variabili all'interno del
+    %%server, latitudine per memorizzare il valore di latitudine inserito dall'utente
+    %%longitudine per memorizzare il valore di longitudine inserito dall'utente
+    %%url per memorizzare la stringha ri richiesta API creata tramite la concatenazione
+    %%dei dati di latitutdine e longitudine
 
-:- dynamic latitudine/1, longitudine/1, url/1.
+    :- dynamic latitudine/1, longitudine/1, url/1.
 
-%%La funzione `inizializza_lat_lon/2` è utilizzata per inizializzare le coordinate latitudinali e longitudinali 
-%%della posizione. Questa funzione utilizza `assertz` per asserire i fatti `latitudine/1` e `longitudine/1`.
-inizializza_lat_lon(Latitudine, Longitudine) :-
-    assertz(latitudine(Latitudine)),
-    assertz(longitudine(Longitudine)).
+    %%La funzione `inizializza_lat_lon/2` è utilizzata per inizializzare le coordinate latitudinali e longitudinali 
+    %%della posizione. Questa funzione utilizza `assertz` per asserire i fatti `latitudine/1` e `longitudine/1`.
+    inizializza_lat_lon(Latitudine, Longitudine) :-
+        assertz(latitudine(Latitudine)),
+        assertz(longitudine(Longitudine)).
 
-%%per l'API OpenWeatherMap. Questa funzione utilizza i fatti `latitudine/1` e `longitudine/1`
-%%per costruire l'URL, che viene quindi asserito nel fatto `url/1`.
-crea_url :-
-    latitudine(Lat),
-    longitudine(Lon),
-    atom_concat('https://api.openweathermap.org/data/2.5/weather?lat=', Lat, Url1),
-    atom_concat(Url1,'&lon=',Url2),
-    atom_concat(Url2,Lon,Url3),
-    atom_concat(Url3,'&appid=9525a467ef22974bc25346d4bc02de69',Url),
-    assertz(url(Url)).
+    %%Questa funzione utilizza i fatti `latitudine/1` e `longitudine/1`
+    %%per costruire l'URL, che viene quindi asserito nel fatto `url/1`.
+    crea_url :-
+        latitudine(Lat),
+        longitudine(Lon),
+        atom_concat('https://api.openweathermap.org/data/2.5/weather?lat=', Lat, Url1),
+        atom_concat(Url1,'&lon=',Url2),
+        atom_concat(Url2,Lon,Url3),
+        atom_concat(Url3,'&appid=9525a467ef22974bc25346d4bc02de69',Url),
+        assertz(url(Url)).
 
-%%importazione la libreria `http/http_client`, che viene utilizzata per effettuare richieste HTTP.
-:- use_module(library(http/http_client)).
+    %%importazione la libreria `http/http_client`, che viene utilizzata per effettuare richieste HTTP.
+    :- use_module(library(http/http_client)).
 
-%%La funzione `calcola_meteo/0` è la funzione principale del programma. Questa funzione utilizza il fatto `url/1` per 
-%%effettuare una richiesta HTTP all'API OpenWeatherMap. La risposta viene quindi scritta sulla console utilizzando `write`. 
-calcola_meteo() :-
-    url(Url),
-    http_get(Url, Response, []),
-    write(Response).
+    %%La funzione `calcola_meteo/0` è la funzione principale del programma. Questa funzione utilizza il fatto `url/1` per 
+    %%effettuare una richiesta HTTP all'API OpenWeatherMap. La risposta viene quindi scritta sulla console utilizzando `write`. 
+    calcola_meteo() :-
+        url(Url),
+        http_get(Url, Response, []),
+        write(Response).
 
 %%test
 
